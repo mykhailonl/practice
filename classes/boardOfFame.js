@@ -37,14 +37,10 @@ class BoardOfFame {
   constructor(numberOfPlaces = 3) {
     this.numberOfPlaces = numberOfPlaces;
     this.robots = [];
-    
-    
   }
 
   addRecord(robot) {
     let isInArray = false;
-    
-    console.log(robot.name);
 
     for (const robotInArray of this.robots) {
       if (robot.name === robotInArray.name) {
@@ -52,44 +48,79 @@ class BoardOfFame {
       }
     }
 
-
     if (isInArray) {
-      // need to find a robot, which is already in array and modify the score
-      // const targetRobot = this.robots.
-    } 
+      const targetRobot = this.robots.filter(
+        (arrayRecord) => arrayRecord.name === robot.name
+      );
+
+      if (targetRobot[0].score < robot.score) {
+        targetRobot[0].score = robot.score;
+      }
+    }
 
     if (!isInArray) {
       this.robots.push(robot);
     }
-    
-    
-    // добавить проверку на то, есть ли робот с таким именем уже в массиве и просто обновлять его счет, а не добавлять новую запись
   }
 
   get list() {
     const sortedBoard = this.robots
-    .sort((robot1, robot2) => robot2.score - robot1.score)
-    .slice(0, this.numberOfPlaces);
+      .sort((robot1, robot2) => robot2.score - robot1.score)
+      .slice(0, this.numberOfPlaces);
 
-    this.boardResult;
+    this.boardResult = ""; // start array
 
-    for (let i = 1; i < this.numberOfPlaces + 1; i++) {
-      if (!this.boardResult) {
-        this.boardResult = `${i}. ... | `;
+    for (let i = 0; i < this.numberOfPlaces; i++) {
+      if (sortedBoard.length === 0) {
+        // basic case if theres no revords yet and we need
+        // to print empty string with places
+        if (!this.boardResult) {
+          this.boardResult = `${i + 1}. ... | `;
+        } else {
+          if (i + 1 !== this.numberOfPlaces) {
+            this.boardResult += `${i + 1}. ... | `;
+          } else {
+            this.boardResult += `${i + 1}. ...`;
+          }
+        }
       } else {
-        this.boardResult += ` ${i}. ... |`;
+        // case where we need to return a string based on records
+        if (sortedBoard[i]) {
+          if (i + 1 !== this.numberOfPlaces) {
+            const result = `${i + 1}. ${sortedBoard[i].name}: ${
+              sortedBoard[i].score
+            } | `;
+
+            this.boardResult += result;
+          } else {
+            const result = `${i + 1}. ${sortedBoard[i].name}: ${
+              sortedBoard[i].score
+            }`;
+
+            this.boardResult += result;
+          }
+        } else {
+          if (i + 1 !== this.numberOfPlaces) {
+            this.boardResult += `${i + 1}. ... | `;
+          } else {
+            this.boardResult += `${i + 1}. ...`;
+          }
+        }
       }
     }
 
-    // добавить проверку на то, пустой ли массив с результатами и в зависимости от этого генерировать строку?
-    return [this.boardResult, sortedBoard];
+    return this.boardResult;
   }
 }
+
 
 const board = new BoardOfFame();
 // console.log(board.list);
 board.addRecord({ name: "Cleaner-900", score: 6 });
-board.addRecord({ name: "Cleaner-775", score: 16 });
-board.addRecord({ name: "Cleaner-775", score: 30 });
+// board.addRecord({ name: "Cleaner-775", score: 16 });
+// board.addRecord({ name: "Cleaner-775", score: 30 });
+// board.addRecord({ name: "Cleaner-900", score: 60 });
+// board.addRecord({ name: "Cleaner-910", score: 60 });
+
 
 console.log(board.list);
