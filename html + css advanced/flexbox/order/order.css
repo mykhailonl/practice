@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* works for splitiing content between rows*/
+  justify-content: space-around; /* for splitting elems on horizontal ax*/
+  align-content: flex-start; /* for positioning content on vertical ax*/
+  align-items: stretch; /* for positioning elems within 1 row*/ 
+  border: 3px solid red;
+  height: 300px;
+}
+
+.box {
+  padding: 5px 10px;
+  background-color: yellow;
+  border: 2px solid blue;
+}
+
+.box-5 {
+  /*
+  every div by default has order 0, so with this param
+  we can control the appearence of elements on a page
+  order: -1;
+  */
+  padding-bottom: 40px;
+}
+
+.box-2 {
+  font-size: 30px;
+}
+
+.box-4 {
+  padding-top: 30px;
+}

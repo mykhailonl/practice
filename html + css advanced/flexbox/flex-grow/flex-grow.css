@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 200px;
+  border: 3px solid red;
+  font-size: 32px;
+  color: white;
+}
+
+.box-1 {
+  flex-grow: 1; /* default is 0*/
+  flex-basis: 40px;
+  max-height: 190px;
+  background-color: blue;
+}
+
+.box-2 {
+  flex-grow: 2; /* controling a proportion*/
+  flex-basis: 60px; /* basic height inside flex container instead
+  of normal height (works better based on flex-direction)*/
+  max-height: 70px; /* we can also control max size of element after 
+  spliting free space between elements*/
+  background-color: green;
+}

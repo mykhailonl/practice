@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  height: 100px;
+  width: 150px;
+  border: 3px solid red;
+  font-size: 32px;
+  color: white;
+}
+/* if we dont have enough space in a container -
+elements will become smaller based on the proportion from their 
+sizes - in this example its 100 and 150px.
+but we also can define coefficient of decreasing the size with
+flex-shrink, which is 1 by default.
+but it will also take into account basic sizes of elements,
+so it will multiply 3x100 and 4x150, so result proportion will
+be 3/6. if theres no visible sizes of an element - we will take
+a look into a content of an element. if we dont want for element
+to shrink - can setup it to 0.
+so - flex-shrink controls an ability of elements to get smaller by width */
+.box-1 {
+  flex-shrink: 3; 
+  flex-basis: 100px;
+  background-color: green;
+}
+
+.box-2 {
+  flex-shrink: 4;
+  flex-basis: 150px;
+  background-color: blue;
+}
+
+.box-3 {
+  flex-grow: 1;
+  background-color: yellow;
+}
